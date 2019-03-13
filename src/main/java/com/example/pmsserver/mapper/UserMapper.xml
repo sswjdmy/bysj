@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmsserver.mapper.UserMapper">
+    <select id="getUserById" resultType="com.example.pmsserver.bean.User">
+        SELECT * FROM user WHERE id=#{id}
+    </select>
+    <select id="getUserByPhone" resultType="com.example.pmsserver.bean.User">
+        SELECT * FROM user WHERE phone=#{phone}
+    </select>
+    <select id="loadUserByUsername" resultType="com.example.pmsserver.bean.User">
+        SELECT * FROM user WHERE username=#{username}
+    </select>
+    <insert id="reg" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO user(username,password,phone) VALUES (#{username},#{password},#{phone})
+    </insert>
+    <update id="updateUserName">
+        UPDATE user set username=#{username} WHERE id=#{id}
+    </update>
+    <update id="updatePassword">
+        UPDATE user set password=#{password} WHERE id=#{id}
+    </update>
+    <update id="updateUserPhone">
+        UPDATE user set phone=#{phone} WHERE id=#{id}
+    </update>
+
+</mapper>

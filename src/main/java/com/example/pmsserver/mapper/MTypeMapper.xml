@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmsserver.mapper.MTypeMapper">
+    <select id="getTypes" resultType="com.example.pmsserver.bean.MType">
+        SELECT * FROM medicine_type WHERE uid=#{uid}
+    </select>
+    <select id="getTypeById" resultType="com.example.pmsserver.bean.MType">
+        SELECT * FROM medicine_type WHERE id=#{id}
+    </select>
+    <insert id="addType" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO medicine_type(name,uid,subnumber) VALUES (#{name},#{uid},#{subNumber})
+    </insert>
+    <select id="getTypeByName" resultType="com.example.pmsserver.bean.MType">
+        SELECT * FROM medicine_type WHERE uid=#{uid}AND name=#{name}
+    </select>
+    <update id="updateName">
+        UPDATE medicine_type set name=#{name} WHERE id=#{id}
+    </update>
+    <update id="updateNumber">
+        UPDATE user set password=#{password} WHERE id=#{id}
+    </update>
+    <update id="updateUserPhone">
+        UPDATE medicine_type set subNumber=#{subNubmber} WHERE id=#{id}
+    </update>
+    <delete id="deleteType">
+        DELETE FROM medicine_type WHERE id = #{id}
+    </delete>
+
+</mapper>

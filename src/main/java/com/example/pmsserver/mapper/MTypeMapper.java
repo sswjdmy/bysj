@@ -13,15 +13,15 @@ import java.util.List;
  */
 @Mapper
 public interface MTypeMapper {
-    int addType(@Param("uid") Long uid ,@Param("name") String name,@Param("subNumber") int subNumber);
+    int addType(MType mType);
 
     List<MType> getTypes(@Param("uid") Long uid);
 
-    MType getTypeByName(@Param("uid")Long uid,@Param("name")String name);
+    MType getTypeByName(@Param("uid")Long uid,@Param("cateName")String cateName);
 
     MType getTypeById(@Param("id") Long id);
 
-    int updateName(@Param("id")Long id,@Param("name") String name);
+    int updateName(@Param("id")Long id,@Param("cateName") String cateName);
 
     int updateNumber(@Param("id")Long id,@Param("subNumber")int number);
 

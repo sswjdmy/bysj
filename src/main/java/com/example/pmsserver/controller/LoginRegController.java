@@ -40,9 +40,11 @@ public class LoginRegController {
             return new RespBean("success", "注册成功!");
         } else if (result == 1) {
             return new RespBean("error", "用户名重复，注册失败!");
-        } else {
-            //失败
-            return new RespBean("error", "注册失败!");
+        } else if (result==2) {
+            return new RespBean("error", "该手机号已被使用");
+        }else {
+                //失败
+                return new RespBean("error", "注册失败!");
         }
     }
 }

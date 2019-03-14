@@ -30,7 +30,7 @@ public class MTypeService {
         if(mTypeMapper.getTypeByName(Util.getCurrentUser().getId(),name)!=null){
             return 1;
         }else {
-            if(mTypeMapper.addType(Util.getCurrentUser().getId(),name,0)==1){
+            if(mTypeMapper.addType(new MType(name,Util.getCurrentUser().getId(),0))==1){
                 return 0;
             }else {
                 return 2;

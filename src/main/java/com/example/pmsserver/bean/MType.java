@@ -7,10 +7,33 @@ package com.example.pmsserver.bean;
  */
 public class MType {
     private Long id;
-    private String name;
-    private Long uId;
+    private String cateName;
+    private Long uid;
     //该种类下药品数量
     private int subNumber;
+
+
+    public String getCateName() {
+        return cateName;
+    }
+
+    public void setCateName(String cateName) {
+        this.cateName = cateName;
+    }
+
+    public Long getUid() {
+        return uid;
+    }
+
+    public void setUid(Long uid) {
+        this.uid = uid;
+    }
+
+    public MType(String name, Long uId, int subNumber){
+        this.cateName=name;
+        this.uid = uId;
+        this.subNumber = subNumber;
+    }
 
     public Long getId() {
         return id;
@@ -19,24 +42,7 @@ public class MType {
     public void setId(Long id) {
         this.id = id;
     }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Long getuId() {
-        return uId;
-    }
-
-    public void setuId(Long uId) {
-        this.uId = uId;
-    }
-
-    public int getSubNumber() {
+        public int getSubNumber() {
         return subNumber;
     }
 

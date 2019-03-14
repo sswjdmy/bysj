@@ -28,6 +28,7 @@ public class MType {
     public void setUid(Long uid) {
         this.uid = uid;
     }
+    public MType(){}
 
     public MType(String name, Long uId, int subNumber){
         this.cateName=name;

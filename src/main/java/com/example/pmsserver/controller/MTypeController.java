@@ -3,12 +3,16 @@ package com.example.pmsserver.controller;
 import com.example.pmsserver.bean.MType;
 import com.example.pmsserver.bean.RespBean;
 import com.example.pmsserver.service.MTypeService;
+import com.sun.xml.internal.ws.encoding.MtomCodec;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Auther: wanjunyi
@@ -34,8 +38,11 @@ public class MTypeController {
     }
 
     @RequestMapping(value = "/getall",method = RequestMethod.GET)
-    public List<MType> getList(){
-        return mTypeService.getTypes();
+    public Map<String,List<MType>> getList(){
+        Map<String,List<MType>> map = new HashMap<>();
+        List<MType> list = mTypeService.getTypes();
+        map.put("types",list);
+        return map;
     }
 
     @RequestMapping(value = "update",method = RequestMethod.PUT)

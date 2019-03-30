@@ -18,11 +18,8 @@
     <update id="updateName">
         UPDATE medicine_type set cateName=#{cateName} WHERE id=#{id}
     </update>
-    <update id="updateNumber">
-        UPDATE user set password=#{password} WHERE id=#{id}
-    </update>
-    <update id="updateUserPhone">
-        UPDATE medicine_type set subNumber=#{subNubmber} WHERE id=#{id}
+    <update id="updatesubNumber">
+        UPDATE medicine_type set subNumber=#{subNumber} WHERE id=#{id}
     </update>
     <delete id="deleteType">
         DELETE FROM medicine_type WHERE id = #{id}

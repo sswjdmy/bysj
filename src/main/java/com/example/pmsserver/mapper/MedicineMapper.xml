@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+        <!DOCTYPE mapper
+                PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmsserver.mapper.MedicineMapper">
+    <insert id="addNewMedicine" parameterType="com.example.pmsserver.bean.Medicine" useGeneratedKeys="true" keyProperty="id">
+             INSERT INTO medicine set uid=#{uid},tid=#{tid},medicineName=#{medicineName},prescription=#{prescription},charge=#{charge},medicineDescribe=#{medicineDescribe},medicineNumber=#{medicineNumber},addTime=#{addTime}
+    </insert>
+    <update id="updateMedicine" parameterType="com.example.pmsserver.bean.Medicine">
+        UPDATE medicine set medicineName = #{medicineName},prescription = #{prescription},charge = #{charge},medicineDescribe = #{medicineDescribe},medicineNumber = #{medicineNumber} WHERE id=#{id}
+    </update>
+    <select id="getMedicineByName" resultType="com.example.pmsserver.bean.Medicine">
+        SELECT * FROM medicine WHERE medicineName = #{medicineName} AND uid =#{uid}
+    </select>
+
+    <select id="getMedicineCountOfUser" resultType="int">
+        SELECT count(*) FROM medicine
+        <where>
+            <if test="uid!=null">
+                AND uid=#{uid}
+            </if>
+            <if test="keywords!=null">
+                AND medicineName LIKE concat('%',#{keywords},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="getMedicineCountOfType" resultType="int">
+        SELECT count(*) FROM medicine
+        <where>
+            <if test="tid!=null">
+                AND tid=#{tid}
+            </if>
+            <if test="keywords!=null">
+                AND medicineName LIKE concat('%',#{keywords},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="getMedicinesByType" resultType="com.example.pmsserver.bean.Medicine">
+        SELECT * FROM medicine  WHERE tid=#{tid}
+        <if test="keywords!=null">
+            AND medicineName LIKE concat('%',#{keywords},'%')
+        </if>
+        ORDER BY addTime DESC limit #{start},#{count};
+    </select>
+    <select id="getMedicinesByUser" resultType="com.example.pmsserver.bean.Medicine">
+        SELECT * FROM medicine  WHERE medicine.`uid`=#{uid}
+        <if test="keywords!=''">
+            AND medicineName LIKE concat('%',#{keywords},'%')
+        </if>
+        ORDER BY addTime DESC limit #{start},#{count};
+    </select>
+
+    <delete id="deleteMedicineById">
+        DELETE FROM medicine WHERE id =#{id}
+    </delete>
+
+</mapper>

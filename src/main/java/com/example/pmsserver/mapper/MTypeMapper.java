@@ -23,6 +23,8 @@ public interface MTypeMapper {
 
     int updateName(@Param("id")Long id,@Param("cateName") String cateName);
 
+    int updatesubNumber(@Param("id")Long id,@Param("subNumber")int subNumber);
+
     int updateNumber(@Param("id")Long id,@Param("subNumber")int number);
 
     int deleteType(@Param("id") Long id);

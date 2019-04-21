@@ -28,4 +28,5 @@ public class Util {
         return user;
     }
     public static SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public static SimpleDateFormat sdf1=new SimpleDateFormat("yyyy-MM-dd");
 }

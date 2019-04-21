@@ -9,6 +9,12 @@
     <update id="updateMedicine" parameterType="com.example.pmsserver.bean.Medicine">
         UPDATE medicine set medicineName = #{medicineName},prescription = #{prescription},charge = #{charge},medicineDescribe = #{medicineDescribe},medicineNumber = #{medicineNumber} WHERE id=#{id}
     </update>
+
+    <update id="setNumber" >
+        UPDATE medicine set medicineNumber = medicineNumber + #{number} WHERE id=#{id}
+    </update>
+
+
     <select id="getMedicineByName" resultType="com.example.pmsserver.bean.Medicine">
         SELECT * FROM medicine WHERE medicineName = #{medicineName} AND uid =#{uid}
     </select>

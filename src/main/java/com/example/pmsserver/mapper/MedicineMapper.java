@@ -31,4 +31,12 @@ public interface MedicineMapper {
                                 int count,@Param("keywords")String keywords);
     int deleteMedicineById(@Param("id")Long id);
 
+    /**
+     * 改变药品数量
+     * @param id
+     * @param number 增减值
+     * @return
+     */
+    int setNumber(@Param("id")long id,@Param("number") int number);
+
 }

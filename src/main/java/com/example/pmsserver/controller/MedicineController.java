@@ -54,7 +54,8 @@ public class MedicineController {
         }
     }
     @RequestMapping(value = "/all", method = RequestMethod.GET)
-    public Map<String, Object> getMedicineByUser( @RequestParam(value = "page", defaultValue = "1") Integer page, @RequestParam(value = "count", defaultValue = "6") Integer count, String keywords) {
+    public Map<String, Object> getMedicineByUser( @RequestParam(value = "page", defaultValue = "1") Integer page,
+                                                  @RequestParam(value = "count", defaultValue = "6") Integer count, String keywords) {
         int totalCount = medicineService.getMedicineCountOfUser(Util.getCurrentUser().getId(),keywords);
 
         List<Medicine> items = medicineService.getMedicinesByUser(Util.getCurrentUser().getId(),page,count,keywords);

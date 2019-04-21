@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmsserver.mapper.OrderMapper">
+    <insert id="add" parameterType="com.example.pmsserver.bean.Order" useGeneratedKeys="true" keyProperty="id" >
+          INSERT INTO orders set uid=#{uid},memberid=#{memberid},orderNumber=#{orderNumber},addTime=#{addTime}
+    </insert>
+    <select id="listOrders" resultType="com.example.pmsserver.bean.Order">
+        SELECT * FROM orders WHERE uid =#{uid} AND addTime BETWEEN #{startDate} AND #{endDate} ORDER BY addTime DESC limit #{start},#{count}
+    </select>
+
+    <select id="getCountOfOrder" resultType="int" >
+        SELECT count(*) FROM orders WHERE uid=#{uid} AND  addTime BETWEEN #{startDate} AND #{endDate}
+    </select>
+
+    <select id="getOrderByOrderNumber" resultType="com.example.pmsserver.bean.Order">
+        SELECT * FROM orders WHERE  orderNumber= #{orderNumber}
+    </select>
+
+    <select id="getLatestOrderNumber" resultType="String">
+        SELECT orderNumber FROM orders WHERE  uid = #{uid} ORDER BY  addTime DESC limit 1
+    </select>
+
+    <update id="pay">
+        UPDATE orders set realAmount = #{realAmount} , status = 1 WHERE orderNumber=#{orderNumber}
+    </update>
+
+    <update id="updateAmount">
+        UPDATE orders set totalAmount = #{totalAmount} WHERE orderNumber=#{orderNumber}
+    </update>
+    <delete id="delete">
+        DELETE FROM orders WHERE orderNumber =#{orderNumber}
+    </delete>
+
+</mapper>

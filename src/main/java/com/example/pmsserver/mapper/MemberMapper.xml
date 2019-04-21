@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.pmsserver.mapper.MemberMapper">
+    <insert id="add" parameterType="com.example.pmsserver.bean.MemberBean" useGeneratedKeys="true" keyProperty="id">
+             INSERT INTO member set uid=#{uid},name=#{name},phone = #{phone},totalAmount = #{totalAmount}
+    </insert>
+    <update id="updateTotalAmount">
+        UPDATE member set totalAmount = #{totalAmount} WHERE id=#{id}
+    </update>
+    <select id="getAll" resultType="com.example.pmsserver.bean.MemberBean">
+        SELECT * FROM member WHERE uid =#{uid}  limit #{start},#{count}
+    </select>
+
+    <select id="getCountOfUser" resultType="int" >
+        SELECT count(*) FROM member WHERE uid=#{uid}
+    </select>
+
+    <select id="getbyId" resultType="com.example.pmsserver.bean.MemberBean">
+        SELECT * FROM member WHERE id = #{id}
+    </select>
+    <select id="getbyPhone" resultType="com.example.pmsserver.bean.MemberBean">
+        SELECT * FROM member WHERE phone = #{phone} AND uid = #{uid}
+    </select>
+
+</mapper>

@@ -3,8 +3,10 @@ package com.example.pmsserver.controller;
 import com.example.pmsserver.bean.Medicine;
 import com.example.pmsserver.bean.RespBean;
 import com.example.pmsserver.bean.RespMedicine;
+import com.example.pmsserver.bean.SubOrder;
 import com.example.pmsserver.service.MTypeService;
 import com.example.pmsserver.service.MedicineService;
+import com.example.pmsserver.service.OrderService;
 import com.example.pmsserver.utils.Util;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +29,8 @@ public class MedicineController {
     MedicineService medicineService;
     @Autowired
     MTypeService mTypeService;
+    @Autowired
+    OrderService orderService;
 
     @RequestMapping(value = "/add",method = RequestMethod.POST)
     public RespBean add(Medicine medicine){
@@ -100,6 +104,19 @@ public class MedicineController {
         }else{
             return  new RespBean("error","删除失败！");
         }
+    }
+
+    @RequestMapping(value = "/sales", method = RequestMethod.GET)
+    public Map<String,Object> getSales(@RequestParam(value = "page", defaultValue = "1") int page,
+                                       @RequestParam(value = "count", defaultValue = "10") int count,
+                                       @RequestParam(value = "startDate", defaultValue = "") Long startDate,
+                                       @RequestParam(value = "endDate", defaultValue = "") Long endDate){
+        Map<String, Object> result = new HashMap<>();
+        int totalCount = orderService.getCountOfMedicine(new Date(startDate),new Date(endDate));
+        List<SubOrder> data = orderService.listSales(page, count, new Date(startDate),new Date(endDate));
+        result.put("totalCount", totalCount);
+        result.put("salesList", data);
+        return result;
     }
 
 

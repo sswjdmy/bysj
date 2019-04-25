@@ -10,13 +10,13 @@
     <select id="listSubOrders" resultType="com.example.pmsserver.bean.SubOrder">
         SELECT * FROM suborder WHERE orderNumber=#{orderNumber}
     </select>
-    
-    <select id="listSales" resultType="java.util.HashMap">
-        SELECT mname,SUM(saleNumber) FROM suborder WHERE uid=#{uid} AND addTime BETWEEN #{startDate} AND #{endTime} GROUP BY manme limit #{start},#{count}
+
+    <select id="listSales" resultType="com.example.pmsserver.bean.SubOrder">
+        SELECT mname,SUM(saleNumber) saleNumber FROM suborder WHERE uid=#{uid} AND addTime BETWEEN #{startDate} AND #{endDate} GROUP BY mname ORDER BY SUM(saleNumber) DESC LiMIT #{start},#{count}
     </select>
 
     <select id="getCountOfMedicine" resultType="int" >
-        SELECT count(*) FROM suborder WHERE uid=#{uid} AND  addTime BETWEEN #{startDate} AND #{endDate} GROUP BY manme
+     SELECT COUNT(xx.c)FROM (SELECT count(*) c FROM suborder WHERE uid=#{uid} AND  addTime BETWEEN #{startDate} AND #{endDate} GROUP BY mname)xx
     </select>
 
     <delete id="delete">

@@ -69,16 +69,17 @@ public class UserService implements UserDetailsService {
     }
 
     /**
-     * @param id,username
+     * 先判断新的用户名是否已经存在，只有新用户名不存在时才会操作成功
+     * @param username
      * @return 0表示成功
      * 1表示用户名重复
      * 2表示失败
      */
-    public int updateUserName(Long id, String username) {
+    public int updateUserName( String username) {
         if (userMapper.loadUserByUsername(username) != null) {
             return 1;
         } else {
-            int result = userMapper.updateUserName(id, username);
+            int result = userMapper.updateUserName(Util.getCurrentUser().getId(), username);
             if (result == 1) {
                 return 0;
             } else {
@@ -90,23 +91,10 @@ public class UserService implements UserDetailsService {
     /**
      * @param id
      * @param password
-     * @param phone
-     * @return 0 ：成功
-     * 1：失败、手机号不正确
-     * 2：失败
+     * @return
      */
-    public int updatePassword(Long id, String password, String phone) {
-        int result;
-        if (!Util.getCurrentUser().getPhone().equals(phone)) {
-            return 1;
-        } else {
-            if (userMapper.updatePassword(id, DigestUtils.md5DigestAsHex(password.getBytes())) == 1) {
-                result = 0;
-            } else {
-                result = 2;
-            }
-            return result;
-        }
+    public int updatePassword(Long id, String password) {
+           return userMapper.updatePassword(id, DigestUtils.md5DigestAsHex(password.getBytes())) ;
     }
 
     public int updateUserPhone(String phone) {

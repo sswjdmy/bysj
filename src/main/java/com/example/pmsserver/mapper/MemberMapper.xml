@@ -18,7 +18,7 @@
     </select>
 
     <select id="getbyId" resultType="com.example.pmsserver.bean.MemberBean">
-        SELECT * FROM member WHERE id = #{id}
+        SELECT * FROM member WHERE id = #{id} AND uid=#{uid}
     </select>
     <select id="getbyPhone" resultType="com.example.pmsserver.bean.MemberBean">
         SELECT * FROM member WHERE phone = #{phone} AND uid = #{uid}

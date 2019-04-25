@@ -26,55 +26,45 @@ public class UserController {
         return Util.getCurrentUser().getUsername();
     }
 
-    @RequestMapping(value = "/getUserById/uid={id}", method = RequestMethod.GET)
-    public User getUserById(@PathVariable("id") Long id) {
-        User user = userService.getUserById(id);
-        return user;
-    }
+//    @RequestMapping(value = "/getUserById/uid={id}", method = RequestMethod.GET)
+//    public User getUserById(@PathVariable("id") Long id) {
+//        User user = userService.getUserById(id);
+//        return user;
+//    }
+//
+//    @RequestMapping(value = "/getUserByPhone/phone={phone}", method = RequestMethod.GET)
+//    public User getUserByPhone(@PathVariable("phone") String phone) {
+//        User user = userService.getUserByPhone(phone);
+//        return user;
+//    }
 
-    @RequestMapping(value = "/getUserByPhone/phone={phone}", method = RequestMethod.GET)
-    public User getUserByPhone(@PathVariable("phone") String phone) {
-        User user = userService.getUserByPhone(phone);
-        return user;
-    }
-
-    @RequestMapping(value = "/updateUserName/uid={id}&username={name}", method = RequestMethod.GET)
-    public void updateUserName(@PathVariable("id") Long id, @PathVariable("name") String name) {
-        int result = userService.updateUserName(id, name);
+    @RequestMapping(value = "/updateUserName", method = RequestMethod.PUT)
+    public RespBean updateUserName(String name) {
+        int result = userService.updateUserName( name);
         switch (result) {
             case 0:
-                new RespBean("success", "修改成功！");
-                break;
+               return   new RespBean("success", "修改成功！");
             case 1:
-                new RespBean("error", "修改失败，该名字已被使用!");
-                break;
+                return new RespBean("error", "修改失败，该名字已被使用!");
             case 2:
-                new RespBean("error", "修改失败！");
-                break;
+                return new RespBean("error", "修改失败！");
             default:
-                new RespBean("error", "修改失败！");
+                return  new RespBean("error", "修改失败！");
         }
     }
 
     @RequestMapping(value = "/updatePwd", method = RequestMethod.PUT)
-    public void updatePassword(User user) {
-        int result = userService.updatePassword(user.getId(), user.getPassword(), user.getPhone());
+    public RespBean updatePassword(String pwd) {
+        int result = userService.updatePassword(Util.getCurrentUser().getId(),pwd);
         switch (result) {
-            case 0:
-                new RespBean("success", "修改成功！");
-                break;
             case 1:
-                new RespBean("error", "修改失败，该手机号已被使用!");
-                break;
-            case 2:
-                new RespBean("error", "修改失败！");
-                break;
+                return new RespBean("success", "修改成功！");
             default:
-                new RespBean("error", "修改失败！");
+                return  new RespBean("error", "修改失败！");
         }
     }
 
-    @RequestMapping(value = "/updatePhone", method = RequestMethod.GET)
+    @RequestMapping(value = "/updatePhone", method = RequestMethod.PUT)
     public RespBean updateUserPhone(@PathVariable String phone) {
         if (userService.updateUserPhone(phone) == 1) {
             return new RespBean("success", "修改成功!");

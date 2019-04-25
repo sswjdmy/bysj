@@ -22,7 +22,7 @@ public interface MemberMapper {
 
     int updateTotalAmount(@Param("id")Long id, @Param("totalAmount")BigDecimal totalAmount);
 
-    MemberBean getbyId(@Param("id")Long id);
+    MemberBean getbyId(@Param("id")Long id,@Param("uid")Long uid);
 
     MemberBean getbyPhone(@Param("phone")String phone,@Param("uid")long uid);
 }

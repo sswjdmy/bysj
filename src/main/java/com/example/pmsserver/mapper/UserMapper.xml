@@ -16,7 +16,7 @@
         INSERT INTO user(username,password,phone) VALUES (#{username},#{password},#{phone})
     </insert>
     <update id="updateUserName">
-        UPDATE user set username=#{username} WHERE id=#{id}
+        UPDATE user set username=#{name} WHERE id=#{id}
     </update>
     <update id="updatePassword">
         UPDATE user set password=#{password} WHERE id=#{id}

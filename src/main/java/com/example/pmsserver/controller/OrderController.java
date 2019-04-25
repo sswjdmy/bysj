@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.text.ParseException;
 import java.util.*;
 
 /**
@@ -39,7 +38,11 @@ public class OrderController {
         int totalCount = orderService.getCountOfOrder(new Date(startDate),new Date(endDate));
         List<Order> orders = orderService.listOrders(page, count, new Date(startDate),new Date(endDate));
         for (Order order : orders) {
-            order.setMemberName(memberService.getById(order.getMemberid()).getName());
+            if(order.getMemberid()==0){
+                order.setMemberName("非会员");
+            }else {
+                order.setMemberName(memberService.getById(order.getMemberid()).getName());
+            }
             order.addTimeStr = Util.sdf.format(order.getAddTime());
         }
         result.put("totalCount", totalCount);

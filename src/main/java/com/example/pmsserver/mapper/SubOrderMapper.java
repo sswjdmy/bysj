@@ -30,7 +30,7 @@ public interface SubOrderMapper {
      * @return String 药名
      *          Integer 数量
      */
-    List<Map<String,Integer>> listSales(@Param("uid")long uid, @Param("start") int start, @Param("count") int count, @Param("startDate") Date startDate, @Param("endDate") Date endDate);
+    List<SubOrder> listSales(@Param("uid")long uid, @Param("start") int start, @Param("count") int count, @Param("startDate") Date startDate, @Param("endDate") Date endDate);
 
     int getCountOfMedicine(@Param("uid") long uid ,@Param("startDate") Date startDate, @Param("endDate") Date endDate);
 

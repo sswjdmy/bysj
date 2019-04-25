@@ -30,8 +30,8 @@ public class MemberService {
         return memberMapper.getCountOfUser(Util.getCurrentUser().getId());
     }
 
-    public MemberBean getById(long id) {
-        return memberMapper.getbyId(id);
+    public MemberBean getById(long id ) {
+        return memberMapper.getbyId(id,Util.getCurrentUser().getId());
     }
 
 
@@ -42,7 +42,7 @@ public class MemberService {
      * 1 成功
      */
     public int updateTotalAmount(Long id, BigDecimal amount) {
-        MemberBean memberBean = memberMapper.getbyId(id);
+        MemberBean memberBean = memberMapper.getbyId(id,Util.getCurrentUser().getId());
         if (memberBean != null) {
             return memberMapper.updateTotalAmount(id, memberBean.getTotalAmount().add(amount));
         }

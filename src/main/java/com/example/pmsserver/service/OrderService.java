@@ -163,7 +163,7 @@ public class OrderService {
      * @param endDate
      * @return
      */
-    public List<Map<String,Integer>> listSales(int page, int count, Date startDate, Date endDate){
+    public List<SubOrder> listSales(int page, int count, Date startDate, Date endDate){
         int start = (page-1)*count;
         if (startDate == null)
             startDate = new Date(1555294908589L);//2019-04-15 10:21:48

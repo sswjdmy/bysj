@@ -118,7 +118,4 @@ public class MedicineController {
         result.put("salesList", data);
         return result;
     }
-
-
-
 }

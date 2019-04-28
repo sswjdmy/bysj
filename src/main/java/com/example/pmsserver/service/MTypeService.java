@@ -36,7 +36,6 @@ public class MTypeService {
                 return 2;
             }
         }
-
     }
 
     public MType getTypeByName(String name) {
